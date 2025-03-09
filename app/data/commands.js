@@ -55,6 +55,7 @@ export const commands = [
     { id: ":%s/foo/bar/g", command: ":%s/foo/bar/g", description: "Replace all 'foo' with 'bar'", category: "commands", mode: "command" },
     { id: ":set number", command: ":set number", description: "Show line numbers", category: "commands", mode: "command" },
     { id: ":help", command: ":help", description: "Open help", category: "commands", mode: "command" },
+    { id: ":e {path}", command: ":e {path}", description: "Open file in new buffer, switch to it. (Creates file if does not exist)", category: "commands", mode: "command" },
 
     // Coding
     { id: "gd", command: "gd", description: "Go to definition", category: "coding", mode: "normal" },
