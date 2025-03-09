@@ -5,14 +5,14 @@ import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Github, 
 import Link from "next/link"
 import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
-import Image from "next/image"
+import Navbar from "@/app/components/navbar";
+import Footer from "@/app/components/footer";
 
 export default function NvimCheatsheet() {
     const [searchQuery, setSearchQuery] = useState("")
     const [activeCategory, setActiveCategory] = useState("all")
     const [favorites, setFavorites] = useState([])
     const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
-    const [stars, setStars] = useState(0)
 
     // Load favorites from localStorage on component mount
     useEffect(() => {
@@ -20,8 +20,6 @@ export default function NvimCheatsheet() {
         if (savedFavorites) {
             setFavorites(JSON.parse(savedFavorites))
         }
-
-        fetchStars()
     }, [])
 
     // Save favorites to localStorage whenever they change
@@ -59,33 +57,10 @@ export default function NvimCheatsheet() {
         return matchesSearch && matchesCategory
     })
 
-    // Get favorite commands for the favorites section
-    const favoriteCommands = commands.filter((cmd) => favorites.includes(cmd.id))
-
-    const fetchStars = async () => {
-        const res = await fetch("https://api.github.com/repos/Ladam0203/nvim-cheatsheet")
-        const data = await res.json()
-        setStars(data.stargazers_count)
-    }
-
     return (
         <div className="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
-            <nav className="navbar bg-base-200 shadow-lg">
-                <div className={"container mx-auto"}>
-                    <div className="navbar-start">
-                        <Link className="btn btn-ghost btn-sm" href={"/"}>
-                            <Image src="/icon.png" alt="NeoVim Cheatsheet" width={24} height={24} />
-                            <span className="text-lg font-bold">NeoVim Cheatsheet</span>
-                        </Link>
-                    </div>
-                    <div className="navbar-end">
-                        <Link href={'https://github.com/Ladam0203/nvim-cheatsheet'} target={'_blank'} className="btn btn-ghost btn-sm">
-                            <Github className="w-5 h-5" />
-                            <span className="badge">{stars}</span>
-                        </Link>
-                    </div>
-                </div>
-            </nav>
+            <Navbar/>
+
             <main className="container mx-auto px-4 py-8 flex-grow">
                 {/* Search and filter */}
                 <div className="flex flex-col md:flex-row gap-2 mb-8">
@@ -160,25 +135,7 @@ export default function NvimCheatsheet() {
                 )}
             </main>
 
-            <footer className="bg-base-200 py-6 mt-auto">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                        <div className="mb-4 md:mb-0">
-                            <p className="text-sm">© {new Date().getFullYear()} NeoVim Cheatsheet. All rights reserved.</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Link
-                                href="https://github.com/Ladam0203/nvim-cheatsheet"
-                                target={'_blank'}
-                                className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
-                            >
-                                <Github className="w-4 h-4" />
-                                <span>GitHub</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     )
 }
