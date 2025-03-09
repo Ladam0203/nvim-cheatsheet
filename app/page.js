@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, Star, BookOpen, Command, Code, Edit, ArrowRight, Sun, Github, Heart } from "lucide-react"
+import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Github, Heart } from "lucide-react"
 import Link from "next/link"
 import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
@@ -12,6 +12,7 @@ export default function NvimCheatsheet() {
     const [activeCategory, setActiveCategory] = useState("all")
     const [favorites, setFavorites] = useState([])
     const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
+    const [stars, setStars] = useState(0)
 
     // Load favorites from localStorage on component mount
     useEffect(() => {
@@ -19,6 +20,8 @@ export default function NvimCheatsheet() {
         if (savedFavorites) {
             setFavorites(JSON.parse(savedFavorites))
         }
+
+        fetchStars()
     }, [])
 
     // Save favorites to localStorage whenever they change
@@ -59,6 +62,12 @@ export default function NvimCheatsheet() {
     // Get favorite commands for the favorites section
     const favoriteCommands = commands.filter((cmd) => favorites.includes(cmd.id))
 
+    const fetchStars = async () => {
+        const res = await fetch("https://api.github.com/repos/Ladam0203/nvim-cheatsheet")
+        const data = await res.json()
+        setStars(data.stargazers_count)
+    }
+
     return (
         <div className="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
             <nav className="navbar bg-base-200 shadow-lg">
@@ -70,8 +79,9 @@ export default function NvimCheatsheet() {
                         </Link>
                     </div>
                     <div className="navbar-end">
-                        <Link href={'https://github.com/Ladam0203/nvim-cheatsheet'} className="btn btn-ghost btn-sm">
+                        <Link href={'https://github.com/Ladam0203/nvim-cheatsheet'} target={'_blank'} className="btn btn-ghost btn-sm">
                             <Github className="w-5 h-5" />
+                            <span className="badge">{stars}</span>
                         </Link>
                     </div>
                 </div>
@@ -143,8 +153,8 @@ export default function NvimCheatsheet() {
                 {filteredCommands.length === 0 && (
                     <div className="alert mt-4">
                         <div className={"flex items-center gap-2"}>
-                            <Star className="w-5 h-5" />
-                            <span>No commands found. Try a different search or category.</span>
+                            <Frown className="w-5 h-5" />
+                            <span>No commands found. Try different filters or open a <a href="https://github.com/Ladam0203/nvim-cheatsheet/pulls" target={'_blank'} className={"link"}>pull request</a> to add a new command!</span>
                         </div>
                     </div>
                 )}
@@ -159,6 +169,7 @@ export default function NvimCheatsheet() {
                         <div className="flex items-center gap-4">
                             <Link
                                 href="https://github.com/Ladam0203/nvim-cheatsheet"
+                                target={'_blank'}
                                 className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
                             >
                                 <Github className="w-4 h-4" />
