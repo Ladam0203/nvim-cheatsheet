@@ -3,6 +3,10 @@
   themes: black --default;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

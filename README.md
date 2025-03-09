@@ -5,10 +5,11 @@ A comprehensive, searchable cheatsheet for NeoVim commands with favorites functi
 ## Features
 
 - 📋 Comprehensive collection of NeoVim commands and shortcuts
-- 🔍 Fast search functionality to find commands quickly
+- 🔍 Fast, fuzzy and debounced search functionality to find commands quickly
 - 🗂️ Category-based filtering (Motions, Editing, Commands, etc.)
 - ⭐ Save your favorite commands for quick access
 - 💾 Persistent favorites using localStorage
+- ⚡ Find popular remappings
 - 📱 Fully responsive design for desktop and mobile devices
 - 🌓 Clean, accessible UI
 
