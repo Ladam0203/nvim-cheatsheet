@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
     title: "Neovim Cheatsheet – Search, Save & Customize Vim Commands",
-    description: "Discover and favorite essential Neovim and Vim commands, motions, and custom shortcuts. Create your personalized cheatsheet for efficient text editing.",
+    description: "Discover and favorite essential Neovim and Vim commands, motions, and find alternative mappings. Create your personalized cheatsheet for efficient text editing.",
 };
 
 
