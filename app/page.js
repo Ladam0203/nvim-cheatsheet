@@ -43,19 +43,32 @@ export default function NvimCheatsheet() {
     ]
 
     // Filter commands based on search query, active category, and selected modes
-    const filteredCommands = commands.filter((cmd) => {
-        const matchesSearch =
-            cmd.command.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            cmd.description.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredCommands = commands
+        .filter((cmd) => {
+            const matchesSearch =
+                cmd.command.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                cmd.description.toLowerCase().includes(searchQuery.toLowerCase())
 
-        const matchesCategory = activeCategory === "all" || cmd.category === activeCategory
+            const matchesCategory = activeCategory === "all" || cmd.category === activeCategory
 
-        if (showFavoritesOnly) {
-            return matchesSearch && matchesCategory && favorites.includes(cmd.id)
-        }
+            if (showFavoritesOnly) {
+                return matchesSearch && matchesCategory && favorites.includes(cmd.id)
+            }
 
-        return matchesSearch && matchesCategory
-    })
+            return matchesSearch && matchesCategory
+        })
+        .sort((a, b) => (favorites.includes(b.id) - favorites.includes(a.id))) // Show favorites first
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value)
+        setActiveCategory("all") // Reset category when searching
+    }
+
+    const handleCategoryClick = (categoryId) => {
+        setActiveCategory(categoryId)
+        setSearchQuery("") // Reset search when changing category
+        setShowFavoritesOnly(false)
+    }
 
     return (
         <div className="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
@@ -71,7 +84,7 @@ export default function NvimCheatsheet() {
                                 placeholder="Search commands..."
                                 className="input input-bordered w-full focus:outline-none focus:border-primary"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={handleSearchChange}
                             />
                             <button className="btn btn-primary">
                                 <Search className="w-5 h-5" />
@@ -87,10 +100,7 @@ export default function NvimCheatsheet() {
                             <button
                                 key={category.id}
                                 className={`tab gap-2 ${activeCategory === category.id ? "tab-active" : ""}`}
-                                onClick={() => {
-                                    setActiveCategory(category.id)
-                                    setShowFavoritesOnly(false)
-                                }}
+                                onClick={() => handleCategoryClick(category.id)}
                             >
                                 {category.icon}
                                 {category.name}
@@ -139,4 +149,3 @@ export default function NvimCheatsheet() {
         </div>
     )
 }
-
