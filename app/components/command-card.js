@@ -79,6 +79,11 @@ export default function CommandCard({ command, isFavorite, onToggleFavorite }) {
                     ) : (
                         <div className={`badge ${getBadgeColor(command.mode)}`}>{command.mode}</div>
                     )}
+                    {command.category === "plugin" && command.plugin && (
+                        <div className="badge badge-outline">
+                            {command.plugin}
+                        </div>
+                    )}
                 </div>
 
                 {/* Remaps Section */}

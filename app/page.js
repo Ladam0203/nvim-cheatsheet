@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Fuse from 'fuse.js';
-import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Github, Heart } from "lucide-react"
+import {Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Github, Heart, Lightbulb} from "lucide-react"
 import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
 import Navbar from "@/app/components/navbar";
@@ -56,6 +56,7 @@ export default function NvimCheatsheet() {
         { id: "coding", name: "Coding", icon: <Code className="w-4 h-4" /> },
         { id: "search", name: "Search", icon: <Search className="w-4 h-4" /> },
         { id: "visual", name: "Visual", icon: <Sun className="w-4 h-4" /> },
+        { id: "plugin", name: "Plugins", icon: <Lightbulb className="w-4 h-4" /> },
     ]
 
     const fuse = new Fuse(commands, {
