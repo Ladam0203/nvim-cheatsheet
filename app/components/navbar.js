@@ -21,7 +21,10 @@ export default function Navbar() {
             <div className={"container mx-auto"}>
                 <div className="navbar-start">
                     <Link className="btn btn-ghost btn-sm" href={"/public"}>
-                        <Image src="/icon.png" alt="NeoVim Cheatsheet" width={24} height={24}/>
+                        <Image src="/icon.png"
+                               alt="NeoVim Cheatsheet Logo"
+                               title="NeoVim Cheatsheet Logo"
+                               width={24} height={24}/>
                         <span className="text-lg font-bold">NeoVim Cheatsheet</span>
                     </Link>
                 </div>

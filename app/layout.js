@@ -15,11 +15,13 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
     title: "Neovim Cheatsheet – Search, Save & Customize Vim Commands",
-    description: "Discover and favorite essential Neovim and Vim commands, motions, plugin commands, and find alternative mappings. Create your personalized cheatsheet for efficient text editing and mastering Vim. Whether you're a beginner or a advanced user, you will find the command you are looking for. Explore command for popular plugins like nvim-tree, telescope, and more. Customize your workflow with custom keybindings, commands for enhanced productivity, and streamline your Neovim setup for maximum efficiency. Perfect for developers, sysadmins, and anyone looking to boost their text editing skills."
+    description: "Explore essential Neovim and Vim commands, remaps, plugin commands, and create a personalized cheatsheet to boost text editing efficiency."
 };
 
 
 export default function RootLayout({children}) {
+    const canonicalUrl = "https://nvim-cheatsheet.vercel.app";
+
     return (
         <html lang="en">
         <head>
@@ -28,6 +30,7 @@ export default function RootLayout({children}) {
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
             <link rel="manifest" href="/site.webmanifest"/>
+            <meta name="canonical" content={canonicalUrl}/>
         </head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
