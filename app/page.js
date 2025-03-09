@@ -70,9 +70,9 @@ export default function NvimCheatsheet() {
                         </Link>
                     </div>
                     <div className="navbar-end">
-                        <button className="btn btn-ghost btn-sm">
+                        <Link href={'https://github.com/Ladam0203/nvim-cheatsheet'} className="btn btn-ghost btn-sm">
                             <Github className="w-5 h-5" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
@@ -158,7 +158,7 @@ export default function NvimCheatsheet() {
                         </div>
                         <div className="flex items-center gap-4">
                             <Link
-                                href="https://github.com/yourusername/neovim-cheatsheet"
+                                href="https://github.com/Ladam0203/nvim-cheatsheet"
                                 className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
                             >
                                 <Github className="w-4 h-4" />
