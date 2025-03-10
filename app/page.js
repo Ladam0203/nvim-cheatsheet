@@ -76,18 +76,6 @@ export default function NvimCheatsheet() {
 
     filteredCommands.sort((a, b) => (favorites.includes(b.id) ? 1 : 0) - (favorites.includes(a.id) ? 1 : 0))
 
-    const [adPosition, setAdPosition] = useState(null)
-
-    useEffect(() => {
-        if (filteredCommands.length < 10) {
-            setAdPosition(null);
-            return;
-        }
-        const minPosition = 10;
-        const maxPosition = filteredCommands.length - 1;
-        setAdPosition(Math.floor(Math.random() * (maxPosition - minPosition + 1)) + minPosition);
-    }, [filteredCommands.length]);
-
     return (
         <div className="flex flex-col min-h-screen bg-base-100 transition-colors duration-300">
             <Navbar />
@@ -159,38 +147,14 @@ export default function NvimCheatsheet() {
                                 </div>
                             ))
                         : // Show actual commands with ad inserted at a random position
-                        filteredCommands.flatMap((cmd, index) => {
-                            const elements = [
-                                <CommandCard
-                                    key={cmd.id}
-                                    command={cmd}
-                                    isFavorite={favorites.includes(cmd.id)}
-                                    onToggleFavorite={toggleFavorite}
-                                />
-                            ]
-
-                            if (adPosition !== null && index === adPosition) {
-                                elements.push(
-                                    <div key="ad" className="card bg-base-200 p-4 border border-warning">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <Megaphone className="w-5 h-5 text-warning" />
-                                            <h3 className="font-medium">Sponsored</h3>
-                                        </div>
-                                        <p className="text-sm mb-2">Keep this site going — feature your product here!</p>
-                                        <div className="flex gap-2 mt-auto">
-                                            <a
-                                                href="mailto:lorinczadam0203@gmail.com"
-                                                className="btn btn-sm btn-outline btn-warning"
-                                            >
-                                                Claim this spot
-                                            </a>
-                                        </div>
-                                    </div>
-                                )
-                            }
-
-                            return elements
-                        })}
+                        filteredCommands.map((cmd) => (
+                            <CommandCard
+                                key={cmd.id}
+                                command={cmd}
+                                isFavorite={favorites.includes(cmd.id)}
+                                onToggleFavorite={toggleFavorite}
+                            />
+                        ))}
                 </div>
 
                 {!isLoading && filteredCommands.length === 0 && (
