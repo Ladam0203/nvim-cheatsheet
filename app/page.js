@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Fuse from "fuse.js"
-import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Heart, Lightbulb, Coffee } from "lucide-react"
+import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Heart, Lightbulb, Megaphone } from "lucide-react"
 import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
 import Navbar from "@/app/components/navbar"
@@ -171,10 +171,10 @@ export default function NvimCheatsheet() {
 
                             if (adPosition !== null && index === adPosition) {
                                 elements.push(
-                                    <div key="coffee-ad" className="card bg-base-200 p-4 border border-warning">
+                                    <div key="ad" className="card bg-base-200 p-4 border border-warning">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <Coffee className="w-5 h-5 text-warning" />
-                                            <h3 className="font-medium">Support Neovim Cheatsheet</h3>
+                                            <Megaphone className="w-5 h-5 text-warning" />
+                                            <h3 className="font-medium">Sponsored</h3>
                                         </div>
                                         <p className="text-sm mb-2">Keep this site going — feature your product here!</p>
                                         <div className="flex gap-2 mt-auto">
