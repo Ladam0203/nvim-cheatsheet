@@ -15,7 +15,7 @@ A comprehensive, searchable cheatsheet for NeoVim commands with favorites functi
 
 ## Demo
 
-Live demo: [https://neovim-cheatsheet.vercel.app](https://neovim-cheatsheet.vercel.app)
+Live demo: [https://nvim-cheatsheet.vercel.app/](https://nvim-cheatsheet.vercel.app/)
 
 ## Installation
 
