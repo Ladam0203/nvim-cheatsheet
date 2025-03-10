@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Github} from "lucide-react";
+import {Github, Coffee} from "lucide-react";
 
 export default function Footer() {
     return (
@@ -10,6 +10,14 @@ export default function Footer() {
                         <p className="text-sm">© {new Date().getFullYear()} NeoVim Cheatsheet. All rights reserved.</p>
                     </div>
                     <div className="flex items-center gap-4">
+                        <Link href={'https://buymeacoffee.com/ladam0203'}
+                                target={'_blank'}
+                                className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
+                        >
+                            <Coffee className="w-4 h-4"/>
+                            <span>Buy me a coffee</span>
+                        </Link>
+
                         <Link
                             href="https://github.com/Ladam0203/nvim-cheatsheet"
                             target={'_blank'}
