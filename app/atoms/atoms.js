@@ -1,10 +1,10 @@
-import { atom } from 'jotai'
-import { loadable } from 'jotai/utils'
+import {atom} from 'jotai'
+import {loadable} from 'jotai/utils'
 
-const asyncKeymapsAtom = atom(
+const asyncMappingsAtom = atom(
     loadable(async () => {
-        const response = await fetch('/api/keymaps')
-        const data = await response.json()
+        const response = await fetch('/api/mappings')
+        return await response.json()
     })
 )
-export const loadableKeymapsAtom = loadable(asyncKeymapsAtom)
+export const loadableMappingsAtom = loadable(asyncMappingsAtom)

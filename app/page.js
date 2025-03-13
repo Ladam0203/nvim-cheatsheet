@@ -3,14 +3,17 @@
 import { useState, useEffect } from "react"
 import Fuse from "fuse.js"
 import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Heart, Lightbulb } from "lucide-react"
-import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
 import Navbar from "@/app/components/navbar"
 import Footer from "@/app/components/footer"
 import StarReminderModal from "@/app/components/star-reminder-modal"
 import useDebounce from "@/app/utils/use-debounce"
+import {loadableMappingsAtom} from "@/app/atoms/atoms";
+import {useAtom} from "jotai";
+import {commands} from "@/app/data/commands"
 
 export default function NvimCheatsheet() {
+    const [keymaps] = useAtom(loadableMappingsAtom);
     const [searchQuery, setSearchQuery] = useState("")
     const debouncedSearchQuery = useDebounce(searchQuery, 300)
     const [isLoading, setIsLoading] = useState(false)
@@ -35,6 +38,13 @@ export default function NvimCheatsheet() {
         const timer = setTimeout(() => setIsLoading(false), 300)
         return () => clearTimeout(timer)
     }, [searchQuery])
+
+    useEffect(() => {
+        fetch('/api/mappings').then(async (response) => {
+            const data = await response.json()
+            console.log(data)
+        })
+    }, [])
 
     const toggleFavorite = (commandId) => {
         setFavorites((prev) => {
