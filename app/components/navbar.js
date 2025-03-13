@@ -43,6 +43,7 @@ export default function Navbar() {
                         href={'https://github.com/Ladam0203/nvim-cheatsheet'}
                         target={'_blank'}
                         className="btn btn-ghost btn-sm"
+                        onClick={() => {localStorage.setItem("nvim-starred", "true")}}
                     >
                         <Github className="w-5 h-5" />
                         <span className="badge">{stars}</span>

@@ -22,6 +22,7 @@ export default function Footer() {
                             href="https://github.com/Ladam0203/nvim-cheatsheet"
                             target={'_blank'}
                             className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
+                            onClick={() => {localStorage.setItem("nvim-starred", "true")}}
                         >
                             <Github className="w-4 h-4"/>
                             <span>GitHub</span>

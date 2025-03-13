@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Fuse from "fuse.js"
-import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Heart, Lightbulb, Megaphone } from "lucide-react"
+import { Search, Frown, BookOpen, Command, Code, Edit, ArrowRight, Sun, Heart, Lightbulb } from "lucide-react"
 import { commands } from "@/app/data/commands"
 import CommandCard from "@/app/components/command-card"
 import Navbar from "@/app/components/navbar"
 import Footer from "@/app/components/footer"
+import StarReminderModal from "@/app/components/star-reminder-modal"
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value)
@@ -26,6 +27,7 @@ export default function NvimCheatsheet() {
     const [activeCategory, setActiveCategory] = useState("all")
     const [favorites, setFavorites] = useState([])
     const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
+    const [showStarModal, setShowStarModal] = useState(false)
 
     useEffect(() => {
         const savedFavorites = localStorage.getItem("nvim-favorites")
@@ -45,7 +47,38 @@ export default function NvimCheatsheet() {
     }, [searchQuery])
 
     const toggleFavorite = (commandId) => {
-        setFavorites((prev) => (prev.includes(commandId) ? prev.filter((id) => id !== commandId) : [...prev, commandId]))
+        setFavorites((prev) => {
+            const newFavorites = prev.includes(commandId) ? prev.filter((id) => id !== commandId) : [...prev, commandId]
+
+            // Check if we should show the star modal
+            if (!prev.includes(commandId)) {
+                // Only when adding to favorites
+                const hasStarred = localStorage.getItem("nvim-starred") === "true"
+                const reminderTime = localStorage.getItem("nvim-reminder-time")
+                const currentTime = new Date().getTime()
+
+                if (!hasStarred && (!reminderTime || currentTime > Number.parseInt(reminderTime))) {
+                    setShowStarModal(true)
+                }
+            }
+
+            return newFavorites
+        })
+    }
+
+    const handleStarRepo = () => {
+        // Mark as starred so we don't show the modal again
+        localStorage.setItem("nvim-starred", "true")
+        // Open GitHub repo in a new tab
+        window.open("https://github.com/Ladam0203/nvim-cheatsheet", "_blank")
+        setShowStarModal(false)
+    }
+
+    const handleRemindLater = () => {
+        // Set reminder for 24 hours later
+        const reminderTime = new Date().getTime() + 24 * 60 * 60 * 1000
+        localStorage.setItem("nvim-reminder-time", reminderTime.toString())
+        setShowStarModal(false)
     }
 
     const categories = [
@@ -162,23 +195,31 @@ export default function NvimCheatsheet() {
                         <div className={"flex items-center gap-2"}>
                             <Frown className="w-5 h-5" />
                             <span>
-                                No commands found. Try different filters or open a{" "}
+                No commands found. Try different filters or open a{" "}
                                 <a
                                     href="https://github.com/Ladam0203/nvim-cheatsheet/pulls"
                                     target={"_blank"}
                                     className={"link"}
                                     rel="noreferrer"
                                 >
-                                    pull request
-                                </a>{" "}
+                  pull request
+                </a>{" "}
                                 to add a new command!
-                            </span>
+              </span>
                         </div>
                     </div>
                 )}
             </main>
 
             <Footer />
+
+            <StarReminderModal
+                isOpen={showStarModal}
+                onClose={() => setShowStarModal(false)}
+                onStarRepo={handleStarRepo}
+                onRemindLater={handleRemindLater}
+            />
         </div>
     )
 }
+
