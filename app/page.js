@@ -8,17 +8,7 @@ import CommandCard from "@/app/components/command-card"
 import Navbar from "@/app/components/navbar"
 import Footer from "@/app/components/footer"
 import StarReminderModal from "@/app/components/star-reminder-modal"
-
-function useDebounce(value, delay) {
-    const [debouncedValue, setDebouncedValue] = useState(value)
-
-    useEffect(() => {
-        const timer = setTimeout(() => setDebouncedValue(value), delay)
-        return () => clearTimeout(timer)
-    }, [value, delay])
-
-    return debouncedValue
-}
+import useDebounce from "@/app/utils/use-debounce"
 
 export default function NvimCheatsheet() {
     const [searchQuery, setSearchQuery] = useState("")
