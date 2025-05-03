@@ -141,5 +141,14 @@ export const commands = [
     { id: "nvim-tree-y", command: "y", description: "Copy filename of node", category: "plugin", plugin: "nvim-tree", mode: "normal" },
     { id: "nvim-tree-Y", command: "Y", description: "Copy relative path of node", category: "plugin", plugin: "nvim-tree", mode: "normal" },
     { id: "nvim-tree-<2-LeftMouse>", command: "<2-LeftMouse>", description: "Open node with double left-click", category: "plugin", plugin: "nvim-tree", mode: "normal" },
-    { id: "nvim-tree-<2-RightMouse>", command: "<2-RightMouse>", description: "Change directory with double right-click", category: "plugin", plugin: "nvim-tree", mode: "normal" }
+    { id: "nvim-tree-<2-RightMouse>", command: "<2-RightMouse>", description: "Change directory with double right-click", category: "plugin", plugin: "nvim-tree", mode: "normal" },
+
+    // Telescope, the best fuzzy-finder!
+    { id: "telescope-nvim-f", command: "<leader>f", description: "Invoke telescope.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-fk", command: "<leader>fk", description: "Find your keymaps.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-fh", command: "<leader>fh", description: "Find help tags.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-ff", command: "<leader>ff", description: "Find files.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-fg", command: "<leader>fg", description: "Find by Grep.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-fdot", command: "<leader>f.", description: "Find recent files.", category: "plugin", plugin: "telescope", mode: "normal" },
+    { id: "telescope-nvim-fd", command: "<leader>fd", description: "Find Diagnostics (LSP)", category: "plugin", plugin: "telescope", mode: "normal" },
 ];
