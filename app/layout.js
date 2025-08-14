@@ -37,6 +37,7 @@ export default function RootLayout({children}) {
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
         {children}
+        <script src="https://fpyf8.com/88/tag.min.js" data-zone="163324" async data-cfasync="false"></script>
         <Analytics />
         </body>
         </html>
