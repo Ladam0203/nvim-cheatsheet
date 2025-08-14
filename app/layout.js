@@ -31,7 +31,7 @@ export default function RootLayout({children}) {
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
             <link rel="manifest" href="/site.webmanifest"/>
             <meta name="canonical" content={canonicalUrl}/>
-            <meta name="monetag" content="d39ca22425f26de0985b00ca78a578e8">
+            <meta name="monetag" content="d39ca22425f26de0985b00ca78a578e8"/>
         </head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
